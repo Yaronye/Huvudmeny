@@ -21,7 +21,7 @@ namespace MainMenu
                     case "1":
                         Console.WriteLine("Enter your age to see pricings\n");
                         age = strToInt(Console.ReadLine()!);
-                        Console.WriteLine(printPricing(returnPrice(age)));
+                        returnPrice(age);
                         break;
                     case "3":
                         Console.WriteLine("Goodbye!\n");
@@ -31,7 +31,7 @@ namespace MainMenu
                         groupPrice();
                         break;
                     default:
-                        Console.WriteLine("That's not an input silly!\n");
+                        Console.WriteLine("That's not a valid input silly!\n");
                         break;
                 }
             }
@@ -50,36 +50,32 @@ namespace MainMenu
             }
             return -1;
         }
-        static string printPricing(int price)
-        {
-            switch (price)
-            {
-                case -1:
-                    return "\n Please enter a real age";
-                case 80:  //ungdom
-                    return "\nYouth ticket 80kr\n";
-                case 90:  //pensionär
-                    return "\nSenior price 90kr\n";
-                case 120:
-                    return "\nStandard ticket 120kr\n";
-                default:
-                    return "\nPlease enter a real age\n";
-            }
-        }
         static int returnPrice(int age)
         {
-            switch (age)
+            if (age < 0)
             {
-                case < 0:
-                    return 0;
-                case < 20:  //ungdom
-                    return 80;
-                case > 64:  //pensionär
-                    return 90;
-                case < 64:
-                    return 120;
-                default:
-                    return 0;
+                Console.WriteLine("\nPlease enter a valid age\n");
+                return 0;
+            }
+            else if (age < 20)
+            {
+                Console.WriteLine("\nYouth ticket 80kr\n");
+                return 80;
+            }
+            else if (age > 64)
+            {
+                Console.WriteLine("\nSenior price 90kr\n");
+                return 90;
+            }
+            else if (age < 64)
+            {
+                Console.WriteLine("\nStandard ticket 120kr\n");
+                return 120;
+            }
+            else
+            {
+                Console.WriteLine("\nUndefined\n");
+                return 0;
             }
         }
 
@@ -91,13 +87,9 @@ namespace MainMenu
             string choice = "n";
             do
             {
-                Console.WriteLine("\nPlease enter the age of your next attendant\n");
-                age = strToInt(Console.ReadLine()!);
-                int tempPrice = returnPrice(age);
-                printPricing(tempPrice);
-                totalPrice += tempPrice;
                 Console.WriteLine("\nAdd another attendant? Y/N\n");
                 choice = Console.ReadLine()!;
+                
                 if (choice == "n" || choice == "N")
                 {
                     Console.WriteLine("\nThe final pricing for your group is {0} kr\n", totalPrice);
@@ -105,7 +97,9 @@ namespace MainMenu
                 }
                 else if (choice == "y" || choice == "Y")
                 {
-                    continue;
+                    Console.WriteLine("\nPlease enter the age of the next attendant\n");
+                    age = strToInt(Console.ReadLine()!);
+                    totalPrice += returnPrice(age);
                 }
                 else
                 {
