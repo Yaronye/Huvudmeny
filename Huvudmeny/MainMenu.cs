@@ -20,15 +20,15 @@ namespace MainMenu
                 {
                     case "1":
                         Console.WriteLine("Enter your age to see pricings\n");
-                        age = strToInt(Console.ReadLine()!);
-                        returnPrice(age);
+                        age = StrToInt(Console.ReadLine()!);
+                        ReturnPrice(age);
                         break;
                     case "3":
                         Console.WriteLine("Goodbye!\n");
                         exit = true;
                         break;
                     case "2":
-                        groupPrice();
+                        GroupPrice();
                         break;
                     default:
                         Console.WriteLine("That's not a valid input silly!\n");
@@ -36,7 +36,7 @@ namespace MainMenu
                 }
             }
         }
-        static int strToInt(string strNumber)
+        static int StrToInt(string strNumber)
         {
             int intNumber;
             try
@@ -50,7 +50,7 @@ namespace MainMenu
             }
             return -1;
         }
-        static int returnPrice(int age)
+        static int ReturnPrice(int age)
         {
             if (age < 0)
             {
@@ -79,7 +79,7 @@ namespace MainMenu
             }
         }
 
-        static int groupPrice()
+        static int GroupPrice()
         {
             bool exit = false;
             int age;
@@ -98,8 +98,8 @@ namespace MainMenu
                 else if (choice == "y" || choice == "Y")
                 {
                     Console.WriteLine("\nPlease enter the age of the next attendant\n");
-                    age = strToInt(Console.ReadLine()!);
-                    totalPrice += returnPrice(age);
+                    age = StrToInt(Console.ReadLine()!);
+                    totalPrice += ReturnPrice(age);
                 }
                 else
                 {
