@@ -11,24 +11,31 @@ namespace MainMenu
         {
             String input = "";
             bool exit = false;
-            int age = 0;
+            int number = 0;
             while (!exit)
             {
-                Console.WriteLine("Welcome to the main menu.\nOptions:\n1.See ticket costs\n2.See group price\n3.Exit\n");
+                Console.WriteLine("Welcome to the main menu.\nOptions:\n1.See ticket costs\n2.See group price\n3.Write a message\n4.Exit\n");
                 input = Console.ReadLine()!;
                 switch (input)
                 {
                     case "1":
                         Console.WriteLine("Enter your age to see pricings\n");
-                        age = StrToInt(Console.ReadLine()!);
-                        ReturnPrice(age);
+                        number = StrToInt(Console.ReadLine()!);
+                        ReturnPrice(number);
                         break;
-                    case "3":
+                    case "4":
                         Console.WriteLine("Goodbye!\n");
                         exit = true;
                         break;
                     case "2":
                         GroupPrice();
+                        break;
+                    case "3":
+                        Console.WriteLine("Enter your message;\n");
+                        input = Console.ReadLine()!;
+                        Console.WriteLine("How many times would you like to display it?\n");
+                        number = StrToInt(Console.ReadLine()!);
+                        MessageLoop(input, number);
                         break;
                     default:
                         Console.WriteLine("That's not a valid input silly!\n");
@@ -109,6 +116,15 @@ namespace MainMenu
             }
             while (!exit);
             return totalPrice;
+        }
+
+        static void MessageLoop(string message, int number)
+        {
+            for(int i = 0; i < number; i++)
+            {
+                Console.WriteLine(message);
+            }
+            Console.WriteLine("\n");
         }
     }
 }
