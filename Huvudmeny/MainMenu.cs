@@ -94,6 +94,11 @@ namespace MainMenu
                 Console.WriteLine("\nPlease enter a valid age\n");
                 return 0;
             }
+            else if (age < 5 || age > 100)
+            {
+                Console.WriteLine("\nChildren under 5 and seniors over 100 may attend for free.\n");
+                return 0;
+            }
             else if (age < 20)
             {
                 Console.WriteLine("\nYouth ticket 80kr\n");
@@ -124,7 +129,7 @@ namespace MainMenu
             string choice = "n";
             do
             {
-                Console.WriteLine("\nAdd another attendant? Y/N\n");
+                Console.WriteLine("\nAdd an attendant? Y/N\n");
                 choice = Console.ReadLine()!;
                 
                 if (choice == "n" || choice == "N")
@@ -134,7 +139,7 @@ namespace MainMenu
                 }
                 else if (choice == "y" || choice == "Y")
                 {
-                    Console.WriteLine("\nPlease enter the age of the next attendant\n");
+                    Console.WriteLine("\nPlease enter their age\n");
                     age = StrToInt(Console.ReadLine()!);
                     totalPrice += ReturnPrice(age);
                 }
