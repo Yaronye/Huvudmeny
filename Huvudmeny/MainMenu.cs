@@ -7,6 +7,16 @@ namespace MainMenu
 {
     class Program
     {
+        /*
+            Main method, Presents the user with 5 choices;
+        1. See ticket costs
+        2. See group price
+        3. Repeat a message
+        4. The third word
+        5. Exit the program
+
+        We create a while loop that continues while exit is not true (while the user has not requested the exit option) and create a switch case within it.
+        */
         static void Main(string[] args)
         {
             String strInput = "";
@@ -14,7 +24,7 @@ namespace MainMenu
             int intInput = 0;
             while (!exit)
             {
-                Console.WriteLine("Welcome to the main menu.\nOptions:\n1.See ticket costs\n2.See group price\n3.Return message\n4.The third word\n5.Exit\n");
+                Console.WriteLine("Welcome to the main menu.\nOptions:\n1.See ticket costs\n2.See group price\n3.Repeat a message\n4.The third word\n5.Exit\n");
                 strInput = Console.ReadLine()!;
                 switch (strInput)
                 {
@@ -36,7 +46,7 @@ namespace MainMenu
                     case "3":
                         Console.WriteLine("Enter your message;\n");
                         strInput = Console.ReadLine()!;
-                        Console.WriteLine("How many times would you like to display it?\n");
+                        Console.WriteLine("How many times would you like us to repeat it?\n");
                         intInput = StrToInt(Console.ReadLine()!);
                         MessageLoop(strInput, intInput);
                         break;
@@ -62,7 +72,8 @@ namespace MainMenu
                 }
             }
         }
-        static int StrToInt(string strNumber)
+
+        static int StrToInt(string strNumber)   //Takes a string as input and tries to return it as an int.
         {
             int intNumber;
             try
@@ -76,7 +87,7 @@ namespace MainMenu
             }
             return -1;
         }
-        static int ReturnPrice(int age)
+        static int ReturnPrice(int age) //Returns ticket prices based on input age
         {
             if (age < 0)
             {
@@ -105,7 +116,7 @@ namespace MainMenu
             }
         }
 
-        static int GroupPrice()
+        static int GroupPrice()     //The user is able to keep adding attendants ages to see final cost of the summarized tickets
         {
             bool exit = false;
             int age;
@@ -137,7 +148,7 @@ namespace MainMenu
             return totalPrice;
         }
 
-        static void MessageLoop(string message, int number)
+        static void MessageLoop(string message, int number)         //Writes to console the inputed string an inputed int number of times
         {
             for(int i = 0; i < number; i++)
             {
@@ -146,18 +157,18 @@ namespace MainMenu
             Console.WriteLine("\n");
         }
 
-        static string[] CreateWordList(string strInput)
+        static string[] CreateWordList(string strInput)            //Splits a string based on blanks and returns them in a string list
         {
-            string[] words = strInput.Split(' ');
+            var words = strInput.Split(' ');
             return words;
         }
 
-        static string ReturnThirdWord(string[] words)
+        static string ReturnThirdWord(string[] words)             //A string list is inputed and the third element is returned
         {
             return words[2];
         }
 
-        static bool ThreeOrMoreCheck(string[] words)
+        static bool ThreeOrMoreCheck(string[] words)              //Return true if the inputed string list has 3 or more elements, false if it does not
         {
             if (words.Length < 3)
             {
