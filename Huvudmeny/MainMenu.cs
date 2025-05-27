@@ -9,34 +9,53 @@ namespace MainMenu
     {
         static void Main(string[] args)
         {
-            String input = "";
+            String strInput = "";
             bool exit = false;
-            int number = 0;
+            int intInput = 0;
             while (!exit)
             {
-                Console.WriteLine("Welcome to the main menu.\nOptions:\n1.See ticket costs\n2.See group price\n3.Write a message\n4.Exit\n");
-                input = Console.ReadLine()!;
-                switch (input)
+                Console.WriteLine("Welcome to the main menu.\nOptions:\n1.See ticket costs\n2.See group price\n3.Return message\n4.The third word\n5.Exit\n");
+                strInput = Console.ReadLine()!;
+                switch (strInput)
                 {
                     case "1":
                         Console.WriteLine("Enter your age to see pricings\n");
-                        number = StrToInt(Console.ReadLine()!);
-                        ReturnPrice(number);
+                        intInput = StrToInt(Console.ReadLine()!);
+                        ReturnPrice(intInput);
                         break;
-                    case "4":
+
+                    case "5":
                         Console.WriteLine("Goodbye!\n");
                         exit = true;
                         break;
+
                     case "2":
                         GroupPrice();
                         break;
+
                     case "3":
                         Console.WriteLine("Enter your message;\n");
-                        input = Console.ReadLine()!;
+                        strInput = Console.ReadLine()!;
                         Console.WriteLine("How many times would you like to display it?\n");
-                        number = StrToInt(Console.ReadLine()!);
-                        MessageLoop(input, number);
+                        intInput = StrToInt(Console.ReadLine()!);
+                        MessageLoop(strInput, intInput);
                         break;
+
+                    case "4":
+                        Console.WriteLine("Enter your message with three or more words in it:\n");
+                        strInput = Console.ReadLine()!;
+                        string[] list = CreateWordList(strInput);
+                        if (ThreeOrMoreCheck(list))
+                        {
+                            strInput = ReturnThirdWord(list);
+                            Console.WriteLine("The third word in your sentence is '{0}'!\n", strInput);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Please enter at least three words.\n");
+                        }
+                            break;
+
                     default:
                         Console.WriteLine("That's not a valid input silly!\n");
                         break;
@@ -125,6 +144,26 @@ namespace MainMenu
                 Console.WriteLine(message);
             }
             Console.WriteLine("\n");
+        }
+
+        static string[] CreateWordList(string strInput)
+        {
+            string[] words = strInput.Split(' ');
+            return words;
+        }
+
+        static string ReturnThirdWord(string[] words)
+        {
+            return words[2];
+        }
+
+        static bool ThreeOrMoreCheck(string[] words)
+        {
+            if (words.Length < 3)
+            {
+                return false;
+            }
+            else { return true; }
         }
     }
 }
