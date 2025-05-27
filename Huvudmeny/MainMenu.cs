@@ -54,10 +54,10 @@ namespace MainMenu
                     case "4":
                         Console.WriteLine("Enter your message with three or more words in it:\n");
                         strInput = Console.ReadLine()!;
-                        string[] list = CreateWordList(strInput);
+                        string[] list = CreateSplitList(strInput);
                         if (ThreeOrMoreCheck(list))
                         {
-                            strInput = ReturnThirdWord(list);
+                            strInput = ReturnThirdElement(list);
                             Console.WriteLine("The third word in your sentence is '{0}'!\n", strInput);
                         }
                         else
@@ -157,20 +157,20 @@ namespace MainMenu
             Console.WriteLine("\n");
         }
 
-        static string[] CreateWordList(string strInput)            //Splits a string based on blanks and returns them in a string list
+        static string[] CreateSplitList(string strInput)            //Splits a string based on blanks and returns them in a string list
         {
-            var words = strInput.Split(' ');
-            return words;
+            var elements = strInput.Split(' ');
+            return elements;
         }
 
-        static string ReturnThirdWord(string[] words)             //A string list is inputed and the third element is returned
+        static string ReturnThirdElement(string[] list)             //A string list is inputed and the third element is returned
         {
-            return words[2];
+            return list[2];
         }
 
-        static bool ThreeOrMoreCheck(string[] words)              //Return true if the inputed string list has 3 or more elements, false if it does not
+        static bool ThreeOrMoreCheck(string[] list)              //Return true if the inputed string list has 3 or more elements, false if it does not
         {
-            if (words.Length < 3)
+            if (list.Length < 3)
             {
                 return false;
             }
